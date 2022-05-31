@@ -23,10 +23,6 @@ class Simulation extends PerformanceTestRunner {
 
   setup("home-page", "Home Page") withRequests navigateToHomePage
 
-  setup("employment-status-page", "Get/Post employment status") withRequests (
-    getEmploymentStatusPage,
-    postEmploymentStatusPage
-  )
 
   setup("annual-salary-page", "Get/Post annual salary") withRequests (
     getAnnualSalaryPage,

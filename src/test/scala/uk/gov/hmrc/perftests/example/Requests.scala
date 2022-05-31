@@ -31,29 +31,15 @@ object Requests extends ServicesConfiguration {
       .get(s"$baseUrl$route/")
       .check(status.is(200))
 
-  val getEmploymentStatusPage: HttpRequestBuilder =
-    http("Get Employment Status Page")
-      .get(s"$baseUrl$route/employment-status")
-      .check(status.is(200))
-      .check(css("input[name=csrfToken]", "value").saveAs("csrfToken"))
-
-  val postEmploymentStatusPage: HttpRequestBuilder =
-    http("Post Employment Status Page")
-      .post(s"$baseUrl$route/employment-status")
-      .formParam("value", "employed")
-      .formParam("csrfToken", s"$${csrfToken}")
-      .check(status.is(303))
-      .check(header("Location").is(s"$route/annual-salary").saveAs("annualSalaryPage"))
-
   val getAnnualSalaryPage: HttpRequestBuilder =
     http("Get Annual Salary Page")
-      .get(s"$baseUrl$${annualSalaryPage}")
+      .get(s"$baseUrl$route/annual-salary")
       .check(status.is(200))
       .check(css("input[name=csrfToken]", "value").saveAs("csrfToken"))
 
   val postAnnualSalaryPage: HttpRequestBuilder =
     http("Post Annual Salary Page")
-      .post(s"$baseUrl$${annualSalaryPage}")
+      .post(s"$baseUrl$route/annual-salary")
       .formParam("value", "25000")
       .formParam("csrfToken", s"$${csrfToken}")
       .check(status.is(303))
