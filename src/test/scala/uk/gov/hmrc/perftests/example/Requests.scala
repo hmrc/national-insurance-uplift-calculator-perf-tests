@@ -24,7 +24,7 @@ import uk.gov.hmrc.performance.conf.ServicesConfiguration
 object Requests extends ServicesConfiguration {
 
   val baseUrl: String = baseUrlFor("national-insurance-uplift-calculator-frontend")
-  val route: String   = "/estimate-how-national-insurance-contributions-changes-affect-you"
+  val route: String   = "/estimate-how-national-insurance-contributions-threshold-change-will-affect-you"
 
   val navigateToHomePage: HttpRequestBuilder =
     http("Navigate to Home Page")
