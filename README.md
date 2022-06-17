@@ -24,14 +24,14 @@ Using the `--wait 100` argument ensures a health check is run on all the service
 
 The template uses [logback.xml](src/test/resources) to configure log levels. The default log level is *WARN*. This can be updated to use a lower level for example *TRACE* to view the requests sent and responses received during the test.
 
-#### Smoke test
+## Smoke test
 
 It might be useful to try the journey with one user to check that everything works fine before running the full performance test
 ```
 sbt -Dperftest.runSmokeTest=true -DrunLocal=true gatling:test
 ```
 
-#### Running the performance test
+## Running the performance test
 ```
 sbt -DrunLocal=true gatling:test
 ```
@@ -46,7 +46,7 @@ sbt -Dperftest.runSmokeTest=true -DrunLocal=false gatling:test
 
 To run a full performance test against staging environment, implement a job builder and run the test **only** from Jenkins.
 
-### Scalafmt
+## Scalafmt
  This repository uses [Scalafmt](https://scalameta.org/scalafmt/), a code formatter for Scala. The formatting rules configured for this repository are defined within [.scalafmt.conf](.scalafmt.conf).
 
  To apply formatting to this repository using the configured rules in [.scalafmt.conf](.scalafmt.conf) execute:
