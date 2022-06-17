@@ -24,22 +24,23 @@ import uk.gov.hmrc.performance.conf.ServicesConfiguration
 object Requests extends ServicesConfiguration {
 
   val baseUrl: String = baseUrlFor("national-insurance-uplift-calculator-frontend")
-  val route: String   = "/estimate-how-national-insurance-contributions-threshold-change-will-affect-you"
+  val route: String   = "/estimate-how-national-insurance-contributions-changes-affect-you"
 
   val navigateToHomePage: HttpRequestBuilder =
     http("Navigate to Home Page")
       .get(s"$baseUrl$route/")
-      .check(status.is(200))
+      .check(status.is(303))
+      .check(header("Location").is(s"$route/annual-salary").saveAs("salaryPage"))
 
   val getAnnualSalaryPage: HttpRequestBuilder =
     http("Get Annual Salary Page")
-      .get(s"$baseUrl$route/annual-salary")
+      .get(s"$baseUrl$${salaryPage}")
       .check(status.is(200))
       .check(css("input[name=csrfToken]", "value").saveAs("csrfToken"))
 
   val postAnnualSalaryPage: HttpRequestBuilder =
     http("Post Annual Salary Page")
-      .post(s"$baseUrl$route/annual-salary")
+      .post(s"$baseUrl$${resultPage}")
       .formParam("value", "25000")
       .formParam("csrfToken", s"$${csrfToken}")
       .check(status.is(303))
