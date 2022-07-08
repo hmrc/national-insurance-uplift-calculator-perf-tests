@@ -29,13 +29,13 @@ object Requests extends ServicesConfiguration {
   val navigateToHomePage: HttpRequestBuilder =
     http("Navigate to Home Page")
       .get(s"$baseUrl$route/")
-      .check(status.is(303))
-      .check(header("Location").is(s"$route/annual-salary").saveAs("salaryPage"))
+      .check(status.is(200))
 
   val getAnnualSalaryPage: HttpRequestBuilder =
     http("Get Annual Salary Page")
       .get(s"$baseUrl$${salaryPage}")
       .check(status.is(200))
+      .check(header("Location").is(s"$route/annual-salary").saveAs("salaryPage"))
       .check(css("input[name=csrfToken]", "value").saveAs("csrfToken"))
 
   val postAnnualSalaryPage: HttpRequestBuilder =
